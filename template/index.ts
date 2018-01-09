@@ -5,24 +5,36 @@
  */
 
 import * as electron from 'electron';
+import * as url from 'url';
+import * as path from 'path';
+
 
 const {app, BrowserWindow, Menu, globalShortcut} = electron;
 
 
 let appEnv = process.env.NODE_ENV;
-let mainWnd: any = null;
+let mainWnd: electron.BrowserWindow = null;
 
 
 app.on('ready', () => {
-    initMainWnd();
-    initMainMenu();
+    createWindow();
 });
 
+app.on('activate', () => {
+    if (mainWnd === null) {
+        createWindow()
+    }
+});
 
 app.on('window-all-closed', () => {
     app.quit();
 });
 
+
+function createWindow() {
+    initMainWnd();
+    initMainMenu();
+}
 
 function initMainWnd() {
     let workArea = electron.screen.getPrimaryDisplay().workAreaSize;
@@ -31,21 +43,27 @@ function initMainWnd() {
         height: workArea.height - 150,
         center: true,
         title: app.getName(),
-        icon: `${__dirname}/../../public/images/app-icon.png`
+        icon: path.join(__dirname, '../../public/images/app-icon.png')
     });
 
-    mainWnd.loadURL(`file://${__dirname}/../../index.html`);
+    mainWnd.loadURL(url.format({
+        pathname: path.join(__dirname, '../../index.html'),
+        protocol: 'file:',
+        slashes: true
+    }));
+
     mainWnd.on('closed', () => {
         mainWnd = null;
     });
 
-    if (appEnv !== 'release') {
+    const isDev = appEnv !== 'release';
+    if (isDev) {
+        mainWnd.webContents.openDevTools();
+
         globalShortcut.register('CmdOrCtrl+Alt+P', () => {
-            mainWnd.toggleDevTools();
+            mainWnd.webContents.toggleDevTools();
         });
     }
-
-    mainWnd.toggleDevTools();
 }
 
 
