@@ -24,7 +24,7 @@ export default class Homepage extends React.Component<any, any> {
     render() {
         return (
             <div style={styles.root}>
-                <span style={styles.text}>Hello ${{ProjectName}}</span>
+                <span style={styles.text}>Hello World</span>
             </div>
         );
     }
@@ -36,7 +36,11 @@ const styles: ReactStyles = {
         top: 0,
         right: 0,
         left: 0,
-        bottom: 0
+        bottom: 0,
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     text: {
         fontSize: 100,
