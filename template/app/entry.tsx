@@ -24,7 +24,7 @@ export default class Homepage extends React.Component<any, any> {
     render() {
         return (
             <div style={styles.root}>
-                <span style={styles.text}>Hello World</span>
+                <span style={styles.text}>Hello ${{ProjectName}}</span>
             </div>
         );
     }

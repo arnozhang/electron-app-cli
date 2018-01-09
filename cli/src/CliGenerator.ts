@@ -86,7 +86,7 @@ export default class CliGenerator {
 
         packageJson.keywords = [
             this.mProjectName,
-            'electron-app-template',
+            'electron-app',
             'electron',
             'react'
         ];
@@ -122,7 +122,7 @@ export default class CliGenerator {
         let dateString = `${date.getFullYear()}/${format(date.getMonth() + 1)}/${format(date.getDate())}`;
 
         for (let name of files) {
-            const pathName = path.join(filePath, 'package.json');
+            const pathName = path.join(filePath, name);
             let content = fs.readFileSync(pathName).toString();
 
             content = content.replace(/\${{ProjectName}}/g, this.mProjectName);
