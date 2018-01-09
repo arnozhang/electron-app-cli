@@ -70,6 +70,13 @@ export default class CliGenerator {
     }
 
     generateProject(filePath: string): void {
+        this.replacePackageJson(filePath);
+        this.replaceFields(filePath);
+
+        this.logSuccess();
+    }
+
+    replacePackageJson(filePath: string): void {
         const packagePath = path.join(filePath, 'package.json');
         const packageJson = JSON.parse(fs.readFileSync(packagePath).toString());
         packageJson.name = this.mProjectName;
@@ -92,8 +99,37 @@ export default class CliGenerator {
 
         const readmePath = path.join(filePath, 'README.md');
         fs.writeFileSync(readmePath, `# ${this.mProjectName}\n\n`);
+    }
 
-        this.logSuccess();
+    replaceFields(filePath: string): void {
+        const files = [
+            'package.json',
+            'index.html',
+            'index.ts',
+            'app/entry.tsx',
+            'app/base/AppBase.ts'
+        ];
+
+        let format = function (value: number): string {
+            if (value >= 10) {
+                return '' + value;
+            }
+
+            return '0' + value;
+        };
+
+        let date = new Date();
+        let dateString = `${date.getFullYear()}/${format(date.getMonth() + 1)}/${format(date.getDate())}`;
+
+        for (let name of files) {
+            const pathName = path.join(filePath, 'package.json');
+            let content = fs.readFileSync(pathName).toString();
+
+            content = content.replace(/\${{ProjectName}}/g, this.mProjectName);
+            content = content.replace(/\${{Date}}/g, dateString);
+
+            fs.writeFileSync(pathName, content);
+        }
     }
 
     logSuccess(): void {
