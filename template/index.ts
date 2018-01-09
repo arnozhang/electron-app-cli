@@ -72,23 +72,6 @@ function initMainMenu() {
 
     const template: any[] = [
         {
-            label: app.getName(),
-            subnemu: [
-                {
-                    label: `About ${app.getName()}...`
-                },
-                {
-                    type: 'separator'
-                },
-                {
-                    label: 'Quit',
-                    click() {
-                        mainWnd.close();
-                    }
-                }
-            ]
-        },
-        {
             label: 'File',
             submenu: [
                 {
@@ -133,6 +116,17 @@ function initMainMenu() {
             ]
         }
     ];
+
+    if (process.platform === 'darwin') {
+        template.unshift({
+            label: app.getName(),
+            submenu: [
+                {role: 'about'},
+                {type: 'separator'},
+                {role: 'quit'}
+            ]
+        });
+    }
 
     const menu = Menu.buildFromTemplate(template);
     Menu.setApplicationMenu(menu);
