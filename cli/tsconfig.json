@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "noImplicitAny": true,
+        "suppressImplicitAnyIndexErrors": true,
+        "lib": [
+            "es5",
+            "es2015.core"
+        ],
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "outDir": "./dist",
+        "sourceMap": true
+    },
+    "exclude": [
+        "node_modules",
+        "dist"
+    ],
+    "files": [
+        "./src/electron-app.ts",
+        "./src/electron-app-init.ts"
+    ]
+}

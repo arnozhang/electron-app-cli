@@ -1,0 +1,45 @@
+{
+    "name": "electron-app-cli",
+    "version": "1.0.0",
+    "description": "A simple CLI for scaffolding Electron app projects.",
+    "scripts": {
+        "build": "tsc",
+        "tp": "./clean-map.sh & tnpm publish"
+    },
+    "author": "Arno Zhang<zyfgood12@163.com>",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/arnozhang/electron-app-cli.git"
+    },
+    "keywords": [
+        "electron-app-cli",
+        "electron",
+        "cli"
+    ],
+    "bin": {
+        "electron-app": "bin/electron-app",
+        "electron-app-init": "bin/electron-app-init"
+    },
+    "files": [
+        "dist/",
+        "bin/"
+    ],
+    "devDependencies": {
+        "@types/inquirer": "0.0.35",
+        "@types/node": "^8.0.53",
+        "@types/ora": "^1.3.1",
+        "@types/webpack": "^3.8.1",
+        "source-map-loader": "^0.2.3",
+        "ts-loader": "^3.0.5",
+        "webpack": "^3.8.1"
+    },
+    "dependencies": {
+        "chalk": "^2.3.0",
+        "commander": "^2.12.1",
+        "inquirer": "^4.0.0",
+        "ora": "^1.3.0",
+        "tildify": "^1.2.0",
+        "xpackage": "^1.0.2"
+    }
+}
