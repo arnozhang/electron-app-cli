@@ -80,7 +80,8 @@ export default class CliGenerator {
         packageJson.keywords = [
             this.mProjectName,
             'electron-app-template',
-            'electron'
+            'electron',
+            'react'
         ];
 
         if (packageJson.repository) {

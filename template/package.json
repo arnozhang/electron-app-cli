@@ -1,0 +1,51 @@
+{
+    "name": "electron-app-cli-template",
+    "version": "1.0.0",
+    "description": "Electron app template.",
+    "main": "./dist/build/index.js",
+    "scripts": {
+        "compile": "tsc",
+        "build": "webpack",
+        "build-release": "webpack --define process.env.NODE_ENV='\"release\"'",
+        "start": "electron .",
+        "package": "electron-packager ./ ${{ProjectName}} --overwrite --app-version=1.0.0 --platform=darwin --arch=all --out=../${{ProjectName}} --version=1.6.3 --icon=./public/images/app-icon.icns"
+    },
+    "keywords": [
+        "electron-app-cli-template",
+        "electron-app-cli",
+        "Electron",
+        "React"
+    ],
+    "files": [
+        "app/",
+        "public/",
+        "index.ts",
+        "index.html",
+        "package.json",
+        "tsconfig.json",
+        "webpack.config.js",
+        "prepare-env.sh",
+        "README.md",
+        ".gitignore",
+        "build",
+        "run"
+    ],
+    "license": "MIT",
+    "dependencies": {
+        "electron-reload": "^1.2.2",
+        "jquery": "^3.2.1",
+        "react": "^16.2.0",
+        "react-dom": "^16.2.0"
+    },
+    "devDependencies": {
+        "@types/jquery": "^3.2.17",
+        "@types/node": "^8.5.7",
+        "@types/react": "^16.0.34",
+        "@types/react-dom": "^16.0.3",
+        "css-loader": "^0.28.8",
+        "source-map-loader": "^0.2.3",
+        "style-loader": "^0.19.1",
+        "ts-loader": "^3.2.0",
+        "webpack": "^3.10.0"
+    }
+}
