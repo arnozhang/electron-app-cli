@@ -104,10 +104,14 @@ export default class CliGenerator {
     replaceFields(filePath: string): void {
         const files = [
             'package.json',
-            'index.html',
+            'public/html/index.html',
+            'public/html/about.html',
             'index.ts',
             'app/entry.tsx',
-            'app/base/AppBase.ts'
+            'app/base/AppBase.ts',
+            'app/main/Application.ts',
+            'app/main/ApplicationMainWindow.ts',
+            'app/main/WindowWrapper.ts'
         ];
 
         let format = function (value: number): string {
