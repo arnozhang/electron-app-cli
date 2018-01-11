@@ -80,6 +80,7 @@ export default class CliGenerator {
         const packagePath = path.join(filePath, 'package.json');
         const packageJson = JSON.parse(fs.readFileSync(packagePath).toString());
         packageJson.name = this.mProjectName;
+        packageJson.version = '1.0.0';
         packageJson.description = `This is Electron app template project: ${this.mProjectName}`;
         packageJson.publishConfig = undefined;
         packageJson.files = undefined;
