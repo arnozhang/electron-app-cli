@@ -48,3 +48,10 @@ npm link typescript
 #
 # to build project.
 #
+#
+# run:
+#
+#   npm run start
+#
+# to run project.
+#
