@@ -12,7 +12,7 @@ const {app, globalShortcut, BrowserWindow, ipcMain} = electron;
 
 export default class Application {
 
-    private mMainWindow: ApplicationMainWindow;
+    private mMainWindow = new ApplicationMainWindow();
     public static readonly mAppEnv = process.env.NODE_ENV;
 
 
@@ -21,7 +21,7 @@ export default class Application {
     }
 
     protected createMainWindow() {
-        this.mMainWindow = new ApplicationMainWindow();
+        this.mMainWindow.initialize();
         this.mMainWindow.create();
         this.initializeGlobalShortcut();
     }
@@ -42,6 +42,7 @@ export default class Application {
         });
 
         app.on('window-all-closed', () => {
+            this.mMainWindow.preQuitApp();
             app.quit();
         });
     }

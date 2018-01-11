@@ -20,8 +20,10 @@ export default class ApplicationMainWindow extends WindowWrapper {
 
     afterWindowCreated(): void {
         super.afterWindowCreated();
-
         this.createApplicationMenu();
+    }
+
+    preQuitApp() {
     }
 
     private onAboutClicked(): void {

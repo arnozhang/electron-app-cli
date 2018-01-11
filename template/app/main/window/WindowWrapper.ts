@@ -22,19 +22,34 @@ export default class WindowWrapper {
     constructor() {
     }
 
+    initialize() {
+    }
+
     createWindow(html: string, title: string,
-        width: number, height: number, icon?: string) {
+        width: number, height: number, icon?: string, show?: boolean) {
 
         if (!icon) {
             icon = 'app-icon.png';
         }
 
+        const hasShowOption = show != undefined;
         this.mWindow = new BrowserWindow({
             width: width,
             height: height,
             center: true,
             title: title,
+            show: hasShowOption ? show : false,
             icon: path.join(__dirname, `../../public/images/${icon}`)
+        });
+
+        if (!hasShowOption) {
+            this.mWindow.once('ready-to-show', () => {
+                this.mWindow.show();
+            });
+        }
+
+        this.mWindow.on('closed', () => {
+            this.mWindow = null;
         });
 
         this.mWindow.loadURL(url.format({
@@ -42,10 +57,6 @@ export default class WindowWrapper {
             protocol: 'file:',
             slashes: true
         }));
-
-        this.mWindow.on('closed', () => {
-            this.mWindow = null;
-        });
 
         this.afterWindowCreated();
     }
