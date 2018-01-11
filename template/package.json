@@ -2,6 +2,7 @@
     "name": "electron-app-cli-template",
     "version": "1.0.4",
     "description": "Electron app template.",
+    "author": "arnozhang",
     "main": "./dist/build/index.js",
     "scripts": {
         "compile": "tsc",
