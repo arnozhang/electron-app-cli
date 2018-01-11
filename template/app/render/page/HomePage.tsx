@@ -1,12 +1,12 @@
 /**
- * ${{ProjectName}} project.
+ * $[[ProjectName]] project.
  *
- * @date ${{Date}}
+ * @date $[[Date]]
  */
 
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import {ReactStyles} from './base/AppBase';
+import {ReactStyles} from '../../base/AppBase';
 
 
 export default class Homepage extends React.Component<any, any> {
@@ -24,7 +24,7 @@ export default class Homepage extends React.Component<any, any> {
     render() {
         return (
             <div style={styles.root}>
-                <span style={styles.text}>Hello ${{ProjectName}}</span>
+                <span style={styles.text}>Hello $[[ProjectName]]</span>
             </div>
         );
     }

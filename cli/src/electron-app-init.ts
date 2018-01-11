@@ -16,8 +16,8 @@ import * as inquirer from 'inquirer';
 import chalk from 'chalk';
 import * as fs from 'fs';
 import * as path from 'path';
-import CliLogger from "./CliLogger";
-import CliGenerator from "./CliGenerator";
+import CliLogger from './CliLogger';
+import CliGenerator from './CliGenerator';
 
 const exists = fs.existsSync;
 

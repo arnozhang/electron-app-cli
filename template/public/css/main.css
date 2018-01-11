@@ -1,6 +1,12 @@
 /**
- * main.css
+ * $[[ProjectName]] project.
+ *
+ * @date $[[Date]]
  */
+
+body {
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+}
 
 a.plain-link {
     text-decoration: none;

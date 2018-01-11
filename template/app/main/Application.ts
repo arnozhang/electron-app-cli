@@ -1,13 +1,13 @@
 /**
- * ${{ProjectName}} project.
+ * $[[ProjectName]] project.
  *
- * @date ${{Date}}
+ * @date $[[Date]]
  */
 
 import * as electron from 'electron';
-import ApplicationMainWindow from "./ApplicationMainWindow";
+import ApplicationMainWindow from './window/ApplicationMainWindow';
 
-const {app, globalShortcut, ipcMain} = electron;
+const {app, globalShortcut, BrowserWindow, ipcMain} = electron;
 
 
 export default class Application {
@@ -36,7 +36,7 @@ export default class Application {
         });
 
         app.on('activate', () => {
-            if (this.mMainWindow === null || this.mMainWindow.isClosed()) {
+            if (this.mMainWindow == null || this.mMainWindow.isClosed()) {
                 this.createMainWindow();
             }
         });
@@ -48,11 +48,8 @@ export default class Application {
 
     private initializeGlobalShortcut() {
         if (!Application.isRelease()) {
-            let webContents = this.mMainWindow.getWindow().webContents;
-            webContents.openDevTools();
-
             globalShortcut.register('CmdOrCtrl+Alt+P', () => {
-                webContents.toggleDevTools();
+                BrowserWindow.getFocusedWindow().webContents.toggleDevTools();
             });
         }
     }

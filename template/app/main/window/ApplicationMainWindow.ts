@@ -1,21 +1,16 @@
 /**
- * ${{ProjectName}} project.
+ * $[[ProjectName]] project.
  *
- * @date ${{Date}}
+ * @date $[[Date]]
  */
 
 import * as electron from 'electron';
-import WindowWrapper from "./WindowWrapper";
+import WindowWrapper from './WindowWrapper';
 
 const {app, Menu, ipcMain} = electron;
 
 
 export default class ApplicationMainWindow extends WindowWrapper {
-
-    private mViewOptions = {
-        showPreview: true,
-        showLineNumber: true
-    };
 
     create(): void {
         let workArea = electron.screen.getPrimaryDisplay().workAreaSize;
@@ -30,7 +25,7 @@ export default class ApplicationMainWindow extends WindowWrapper {
     }
 
     private onAboutClicked(): void {
-        new WindowWrapper().createWindow('about.html', 'About ${{ProjectName}}', 300, 200);
+        new WindowWrapper().createWindow('about.html', 'About $[[ProjectName]]', 300, 200);
     }
 
     private createApplicationMenu(): void {
@@ -58,7 +53,7 @@ export default class ApplicationMainWindow extends WindowWrapper {
             {
                 label: 'Edit',
                 submenu: [
-                    {role: 'undo', click: this.onAboutClicked.bind(this)},
+                    {role: 'undo'},
                     {role: 'redo'},
                     {type: 'separator'},
                     {role: 'cut'},
@@ -73,7 +68,7 @@ export default class ApplicationMainWindow extends WindowWrapper {
             template.unshift({
                 label: app.getName(),
                 submenu: [
-                    {role: 'about'},
+                    {label: 'About', click: this.onAboutClicked.bind(this)},
                     {type: 'separator'},
                     {role: 'quit'}
                 ]

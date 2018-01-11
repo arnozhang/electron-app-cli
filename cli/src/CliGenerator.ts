@@ -11,11 +11,11 @@
  *
  */
 
-import * as fs from "fs";
+import * as fs from 'fs';
 import * as Ora from 'ora';
-import * as path from "path";
-import chalk from "chalk";
-import CliLogger from "./CliLogger";
+import * as path from 'path';
+import chalk from 'chalk';
+import CliLogger from './CliLogger';
 
 const tildify = require('tildify');
 const xpackage = require('xpackage');
@@ -104,14 +104,10 @@ export default class CliGenerator {
     replaceFields(filePath: string): void {
         const files = [
             'package.json',
-            'public/html/index.html',
-            'public/html/about.html',
             'index.ts',
-            'app/entry.tsx',
-            'app/base/AppBase.ts',
-            'app/main/Application.ts',
-            'app/main/ApplicationMainWindow.ts',
-            'app/main/WindowWrapper.ts'
+            'public/css',
+            'public/html',
+            'app'
         ];
 
         let format = function (value: number): string {
@@ -127,10 +123,22 @@ export default class CliGenerator {
 
         for (let name of files) {
             const pathName = path.join(filePath, name);
+            this.replaceFileOrPath(pathName, dateString);
+        }
+    }
+
+    private replaceFileOrPath(pathName: string, dateString: string): void {
+        let stat = fs.statSync(pathName);
+        if (stat.isDirectory()) {
+            fs.readdirSync(pathName).forEach((fileName: string): void => {
+                let fullPath = path.join(pathName, fileName);
+                this.replaceFileOrPath(fullPath, dateString);
+            });
+        } else if (stat.isFile()) {
             let content = fs.readFileSync(pathName).toString();
 
-            content = content.replace(/\${{ProjectName}}/g, this.mProjectName);
-            content = content.replace(/\${{Date}}/g, dateString);
+            content = content.replace(/\$\[\[ProjectName]]/g, this.mProjectName);
+            content = content.replace(/\$\[\[Date]]/g, dateString);
 
             fs.writeFileSync(pathName, content);
         }

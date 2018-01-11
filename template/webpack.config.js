@@ -7,7 +7,8 @@ module.exports = {
     target: 'electron',
     entry: {
         'index': './index.ts',
-        'app/entry': './app/entry.tsx'
+        'app/HomePage': './app/render/page/HomePage.tsx',
+        'app/AboutPage': './app/render/page/AboutPage.tsx'
     },
 
     output: {

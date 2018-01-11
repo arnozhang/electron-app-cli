@@ -16,6 +16,6 @@
     "include": [
     ],
     "files": [
-        "./app/entry.tsx"
+        "./app/render/page/HomePage.tsx"
     ]
 }

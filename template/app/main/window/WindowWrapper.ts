@@ -1,20 +1,22 @@
 /**
- * ${{ProjectName}} project.
+ * $[[ProjectName]] project.
  *
- * @date ${{Date}}
+ * @date $[[Date]]
  */
 
 import * as electron from 'electron';
-import * as path from "path";
-import * as url from "url";
+import {BrowserWindow} from 'electron';
+import * as path from 'path';
+import * as url from 'url';
+import Application from '../Application';
 
 
-const {app, BrowserWindow, Menu, globalShortcut, ipcMain} = electron;
+const {app, Menu, globalShortcut, ipcMain} = electron;
 
 
 export default class WindowWrapper {
 
-    protected mWindow: any = null;
+    protected mWindow: BrowserWindow = null;
 
 
     constructor() {
@@ -48,7 +50,7 @@ export default class WindowWrapper {
         this.afterWindowCreated();
     }
 
-    getWindow() {
+    getWindow(): BrowserWindow {
         return this.mWindow;
     }
 
@@ -61,5 +63,8 @@ export default class WindowWrapper {
     }
 
     afterWindowCreated(): void {
+        if (!Application.isRelease()) {
+            this.mWindow.webContents.openDevTools();
+        }
     }
 }

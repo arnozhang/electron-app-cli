@@ -1,10 +1,10 @@
 /**
- * ${{ProjectName}} project.
+ * $[[ProjectName]] project.
  *
- * @date ${{Date}}
+ * @date $[[Date]]
  */
 
-import Application from "./app/main/Application";
+import Application from './app/main/Application';
 
 
 const application = new Application();
