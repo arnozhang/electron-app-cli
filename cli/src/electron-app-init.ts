@@ -19,8 +19,6 @@ import * as path from 'path';
 import CliLogger from './CliLogger';
 import CliGenerator from './CliGenerator';
 
-const exists = fs.existsSync;
-
 
 const program = new Command();
 
@@ -33,7 +31,7 @@ program.on('--help', function () {
     console.log('  Examples:');
     console.log();
     console.log(chalk.gray('    # create a new project for Electron app template'));
-    console.log('    $ electron-app init my-project');
+    console.log('    $ electron-app init my-project [in-where]');
     console.log();
 });
 
@@ -71,30 +69,40 @@ const clone = program.clone || false;
 
 console.log();
 process.on('exit', () => {
-    console.log()
+    console.log();
 });
 
 
-if (exists(to)) {
-    inquirer.prompt([{
-        type: 'confirm',
-        message: inPlace
-            ? 'Generate project in current directory?'
-            : 'Target directory exists. Continue?',
-        name: 'ok'
-    }]).then((answers: any) => {
-        if (answers.ok) {
-            run()
-        }
-    }).catch(CliLogger.fatal);
+if (fs.existsSync(to)) {
+    if (inPlace) {
+        run();
+    } else {
+        inquirer.prompt([{
+            type: 'confirm',
+            message: 'Target directory exists. Continue?',
+            name: 'ok'
+        }]).then((answers: any) => {
+            if (answers.ok) {
+                run();
+            }
+        }).catch(CliLogger.fatal);
+    }
 } else {
-    run()
+    run();
 }
+
 
 /**
  * Check, download and generate the project.
  */
 
 function run() {
-    new CliGenerator(name, projectName, program).generate(to);
+    inquirer.prompt([{
+        type: 'input',
+        message: 'Enter project author name: ',
+        name: 'author'
+    }]).then((answers: any) => {
+        let author = answers.author ? answers.author : 'anonymous';
+        new CliGenerator(name, projectName, program, author).generate(to);
+    }).catch(CliLogger.fatal);
 }

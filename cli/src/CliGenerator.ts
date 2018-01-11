@@ -32,10 +32,12 @@ export default class CliGenerator {
     private mName: string;
     private mProjectName: string;
     private mProgram: any;
+    private mAuthor: string;
 
 
-    constructor(name: string, projectName: string, program: any) {
+    constructor(name: string, projectName: string, program: any, author: string) {
         this.mName = name;
+        this.mAuthor = author;
         this.mProgram = program;
         this.mProjectName = projectName;
     }
@@ -139,6 +141,7 @@ export default class CliGenerator {
             let content = fs.readFileSync(pathName).toString();
 
             content = content.replace(/\$\[\[ProjectName]]/g, this.mProjectName);
+            content = content.replace(/\$\[\[Author]]/g, this.mAuthor);
             content = content.replace(/\$\[\[Date]]/g, dateString);
 
             fs.writeFileSync(pathName, content);

@@ -1,6 +1,7 @@
 /**
  * $[[ProjectName]] project.
  *
+ * @author $[[Author]]
  * @date $[[Date]]
  */
 
