@@ -1,6 +1,6 @@
 {
     "name": "electron-app-cli-template",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "description": "Electron app template.",
     "author": "arnozhang",
     "main": "./dist/build/index.js",
@@ -9,7 +9,7 @@
         "build": "webpack",
         "build-release": "webpack --define process.env.NODE_ENV='\"release\"'",
         "start": "electron .",
-        "package": "electron-packager ./ $[[ProjectName]] --overwrite --app-version=1.0.0 --platform=darwin --arch=all --out=../$[[ProjectName]] --version=1.6.3 --icon=./public/images/app-icon.icns"
+        "package": "electron-packager ./ $[[ProjectName]] --overwrite --app-version=1.0.0 --platform=darwin --arch=all --out=../$[[ProjectName]] --electron-version=1.7.10 --icon=./public/images/app-icon.icns"
     },
     "keywords": [
         "electron-app-cli-template",
